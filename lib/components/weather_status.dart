@@ -27,10 +27,10 @@ class WeatherStatus extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
-            Text(status, style: text.labelLarge?.copyWith(color: colors.primary)),
+            Text(status, style: text.titleMedium?.copyWith(color: colors.primary)),
           ],
         ),
-        Text("°C", style: text.labelMedium?.copyWith(color: colors.primary)),
+        Text("°C", style: text.labelLarge?.copyWith(color: colors.primary)),
       ],
     );
   }

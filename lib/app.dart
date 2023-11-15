@@ -24,7 +24,11 @@ class _AppState extends State<App> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0x001e1e1e)),
+      theme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.light,
+        colorSchemeSeed: const Color.fromARGB(255, 4, 43, 89),
+      ),
       home: const RootLayout(),
     );
   }
