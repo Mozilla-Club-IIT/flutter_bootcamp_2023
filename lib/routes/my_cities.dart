@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/components/city_list_item.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/models/city.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/routes/add_city.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/utils/hive.dart';
 
 class MyCities extends StatefulWidget {
   const MyCities({super.key});
@@ -13,10 +13,7 @@ class MyCities extends StatefulWidget {
 }
 
 class _MyCitiesState extends State<MyCities> {
-  Iterable<City> get places {
-    final box = Hive.box<City>("cities");
-    return box.values;
-  }
+  Iterable<City> get cities => getCities();
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +23,13 @@ class _MyCitiesState extends State<MyCities> {
         floating: true,
         actions: [IconButton(onPressed: onAddPressed, icon: const Icon(Icons.add_rounded))],
       ),
-      if (places.isEmpty)
+      if (cities.isEmpty)
         const SliverFillRemaining(child: _EmptyScreen())
       else
         SliverList.builder(
-          itemCount: places.length,
+          itemCount: cities.length,
           itemBuilder: (context, i) {
-            final city = places.elementAt(i);
+            final city = cities.elementAt(i);
 
             return CityListItem(
               location: "${city.name}, ${city.country}",
@@ -45,8 +42,9 @@ class _MyCitiesState extends State<MyCities> {
     ]);
   }
 
-  void onAddPressed() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCity()));
+  Future<void> onAddPressed() async {
+    await Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCity()));
+    if (context.mounted) setState(() => {});
   }
 }
 

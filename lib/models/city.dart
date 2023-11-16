@@ -22,4 +22,13 @@ class City {
     required this.latitude,
     required this.longitude,
   });
+
+  factory City.fromJson(Map<String, dynamic> map) {
+    return City(
+      name: map["name"] as String,
+      country: map["country"] as String,
+      latitude: map["lat"] as double,
+      longitude: map["lon"] as double,
+    );
+  }
 }
