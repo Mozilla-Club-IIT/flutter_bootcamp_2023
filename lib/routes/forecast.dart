@@ -26,7 +26,7 @@ class _ForecastState extends State<Forecast> {
         itemBuilder: (context, i) {
           return WeatherCard(
             degree: 19,
-            status: WeatherStatus.rainy,
+            status: WeatherStatus.clear,
             date: now.copyWith(day: now.day + i),
             wind: "120km/h",
             humidity: "22%",
