@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/components/city_list_item.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/models/city.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/routes/add_city.dart';
 
 class MyCities extends StatefulWidget {
   const MyCities({super.key});
@@ -23,7 +24,7 @@ class _MyCitiesState extends State<MyCities> {
       SliverAppBar(
         title: const Text("My Cities"),
         floating: true,
-        actions: [IconButton(onPressed: () => {}, icon: const Icon(Icons.add_rounded))],
+        actions: [IconButton(onPressed: onAddPressed, icon: const Icon(Icons.add_rounded))],
       ),
       if (places.isEmpty)
         const SliverFillRemaining(child: _EmptyScreen())
@@ -42,6 +43,10 @@ class _MyCitiesState extends State<MyCities> {
           },
         )
     ]);
+  }
+
+  void onAddPressed() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCity()));
   }
 }
 
