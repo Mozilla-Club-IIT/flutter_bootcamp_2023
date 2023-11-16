@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_status.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_temp_status.dart';
 
 class WeatherBar extends StatelessWidget {
   final int degree;
@@ -22,23 +22,21 @@ class WeatherBar extends StatelessWidget {
     final text = theme.textTheme;
     final color = theme.colorScheme;
 
-    final df = DateFormat("EEE, MMM d", "en-US");
+    final dateString = DateFormat("EEE, MMM d", "en-US").format(date);
+    final placeTextStyle = text.headlineLarge?.copyWith(
+      color: color.primary,
+      fontWeight: FontWeight.bold,
+    );
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(
-            place,
-            style: text.headlineLarge?.copyWith(color: color.primary, fontWeight: FontWeight.bold),
-          ),
-          WeatherStatus(degree: degree, status: status),
+          Text(place, style: placeTextStyle),
+          WeatherTempStatus(degree: degree, status: status),
         ]),
-        Text(
-          df.format(date),
-          style: text.labelLarge?.copyWith(color: color.primary.withOpacity(0.5)),
-        ),
+        Text(dateString, style: text.labelLarge?.copyWith(color: color.primary.withOpacity(0.5))),
       ],
     );
   }
