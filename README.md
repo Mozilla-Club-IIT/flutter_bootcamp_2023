@@ -7,4 +7,5 @@
 
 ## Development
 
+- `dart run build_runner build`: Running code-gen.
 - `flutter run`
