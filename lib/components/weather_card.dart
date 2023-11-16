@@ -24,8 +24,13 @@ class WeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return Card(
+      elevation: 0,
       shadowColor: Colors.transparent,
+      color: colors.surfaceVariant,
       child: Container(
         height: 156,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
