@@ -25,7 +25,7 @@ class _ForecastState extends State<Forecast> {
         separatorBuilder: (context, index) => const SizedBox(height: 4),
         itemBuilder: (context, i) {
           return WeatherCard(
-            degree: 19,
+            temperature: 19,
             status: WeatherStatus.clear,
             date: now.copyWith(day: now.day + i),
             wind: "120km/h",

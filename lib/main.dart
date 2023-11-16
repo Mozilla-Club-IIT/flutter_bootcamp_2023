@@ -6,7 +6,7 @@ import 'package:mozc_flutter_bootcamp_23_showcase/models/city.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CityAdapter());
-  await Hive.openBox("cities");
+  await Hive.openBox<City>("cities");
 
   runApp(const App());
 }

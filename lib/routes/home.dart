@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_bar.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,9 +22,9 @@ class _HomeState extends State<Home> {
           children: [
             WeatherBar(
               date: DateTime(2023, 11, 14),
-              degree: 19,
-              place: "Colombo,\nSri Lanka",
-              status: "Rainy",
+              temperature: 19,
+              location: "Colombo,\nSri Lanka",
+              status: WeatherStatus.rain,
             ),
             const Center(child: Icon(Icons.sunny, size: 128)),
             const MetricsBar(humidity: "22%", wind: "106km/h", chanceOfRain: "11%")

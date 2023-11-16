@@ -5,7 +5,7 @@ import 'package:mozc_flutter_bootcamp_23_showcase/utils/date.dart';
 
 class WeatherCard extends StatelessWidget {
   final DateTime date;
-  final int degree;
+  final int temperature;
   final WeatherStatus status;
 
   final String humidity;
@@ -15,7 +15,7 @@ class WeatherCard extends StatelessWidget {
   const WeatherCard({
     super.key,
     required this.date,
-    required this.degree,
+    required this.temperature,
     required this.status,
     required this.humidity,
     required this.wind,
@@ -41,13 +41,13 @@ class WeatherCard extends StatelessWidget {
             Flexible(
               child: _WeatherCardInfo(
                 date: date,
-                degree: degree,
+                temperature: temperature,
                 humidity: humidity,
                 wind: wind,
                 chanceOfRain: chanceOfRain,
               ),
             ),
-            _TemperatureStatus(degree: degree, status: status)
+            _TemperatureStatus(degree: temperature, status: status)
           ],
         ),
       ),
@@ -57,7 +57,7 @@ class WeatherCard extends StatelessWidget {
 
 class _WeatherCardInfo extends StatelessWidget {
   final DateTime date;
-  final int degree;
+  final int temperature;
 
   final String humidity;
   final String wind;
@@ -65,7 +65,7 @@ class _WeatherCardInfo extends StatelessWidget {
 
   const _WeatherCardInfo({
     required this.date,
-    required this.degree,
+    required this.temperature,
     required this.humidity,
     required this.wind,
     required this.chanceOfRain,

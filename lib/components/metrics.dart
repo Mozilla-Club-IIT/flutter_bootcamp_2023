@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
 
 class MetricsBar extends StatelessWidget {
-  final String humidity;
   final String wind;
+  final String humidity;
   final String chanceOfRain;
 
   const MetricsBar({
     super.key,
-    required this.humidity,
     required this.wind,
+    required this.humidity,
     required this.chanceOfRain,
   });
 
@@ -24,14 +24,14 @@ class MetricsBar extends StatelessWidget {
 }
 
 class TinyMetricsBar extends StatelessWidget {
-  final String humidity;
   final String wind;
+  final String humidity;
   final String chanceOfRain;
 
   const TinyMetricsBar({
     super.key,
-    required this.humidity,
     required this.wind,
+    required this.humidity,
     required this.chanceOfRain,
   });
 

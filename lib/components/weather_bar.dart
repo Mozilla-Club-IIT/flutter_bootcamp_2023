@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/utils/date.dart';
 
 class WeatherBar extends StatelessWidget {
-  final int degree;
-  final String status;
-  final String place;
+  final WeatherStatus status;
+  final int temperature;
+  final String location;
   final DateTime date;
 
   const WeatherBar({
     super.key,
-    required this.degree,
+    required this.temperature,
     required this.status,
-    required this.place,
+    required this.location,
     required this.date,
   });
 
@@ -33,8 +34,8 @@ class WeatherBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(place, style: placeTextStyle),
-          WeatherTempStatus(degree: degree, status: status),
+          Text(location, style: placeTextStyle),
+          WeatherTempStatus(temperature: temperature, status: status),
         ]),
         Text(dateString, style: text.labelLarge?.copyWith(color: color.primary.withOpacity(0.5))),
       ],
@@ -43,10 +44,10 @@ class WeatherBar extends StatelessWidget {
 }
 
 class WeatherTempStatus extends StatelessWidget {
-  final int degree;
-  final String status;
+  final int temperature;
+  final WeatherStatus status;
 
-  const WeatherTempStatus({super.key, required this.degree, required this.status});
+  const WeatherTempStatus({super.key, required this.temperature, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +65,8 @@ class WeatherTempStatus extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(degree.toString(), style: tempTextStyle),
-          Text(status, style: text.titleMedium?.copyWith(color: colors.primary)),
+          Text(temperature.toString(), style: tempTextStyle),
+          Text(status.asHumanReadable(), style: text.titleMedium?.copyWith(color: colors.primary)),
         ]),
         Text("°C", style: text.labelLarge?.copyWith(color: colors.primary)),
       ],
