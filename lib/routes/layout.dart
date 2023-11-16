@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/routes/forecast.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/routes/home.dart';
@@ -11,7 +12,10 @@ class RootLayout extends StatefulWidget {
 }
 
 class _RootLayoutState extends State<RootLayout> {
+  // When adding a reverse transition between backward navigation,
+  // we need to know which index was assigned to page before the setState re-render.
   PageIndex page = PageIndex.home;
+  PageIndex pagePreRender = PageIndex.home;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class _RootLayoutState extends State<RootLayout> {
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home_filled),
+            selectedIcon: Icon(Icons.home_rounded),
             label: "Home",
           ),
           NavigationDestination(
@@ -37,11 +41,23 @@ class _RootLayoutState extends State<RootLayout> {
           ),
         ],
       ),
-      body: buildPage(),
+      body: PageTransitionSwitcher(
+        reverse: page.index < pagePreRender.index,
+        duration: const Duration(milliseconds: 500),
+        transitionBuilder: (child, x, y) => SharedAxisTransition(
+          animation: x,
+          secondaryAnimation: y,
+          transitionType: SharedAxisTransitionType.horizontal,
+          child: child,
+        ),
+        child: buildPageView(page),
+      ),
     );
   }
 
-  Widget buildPage() {
+  Widget buildPageView(PageIndex page) {
+    pagePreRender = page;
+
     switch (page) {
       case PageIndex.home:
         return const Home();

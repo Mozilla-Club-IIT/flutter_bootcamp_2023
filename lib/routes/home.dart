@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/meric.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart';
 import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_bar.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -27,11 +26,7 @@ class _HomeState extends State<Home> {
               status: "Rainy",
             ),
             const Center(child: Icon(Icons.sunny, size: 128)),
-            const Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              Metric(type: MetricType.wind, value: "106km/h"),
-              Metric(type: MetricType.humidity, value: "22%"),
-              Metric(type: MetricType.chanceOfRain, value: "11%"),
-            ]),
+            const MetricsBar(humidity: "22%", wind: "106km/h", chanceOfRain: "11%")
           ],
         ),
       ),

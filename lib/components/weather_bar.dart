@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_temp_status.dart';
+import 'package:mozc_flutter_bootcamp_23_showcase/utils/date.dart';
 
 class WeatherBar extends StatelessWidget {
   final int degree;
@@ -22,7 +21,8 @@ class WeatherBar extends StatelessWidget {
     final text = theme.textTheme;
     final color = theme.colorScheme;
 
-    final dateString = DateFormat("EEE, MMM d", "en-US").format(date);
+    final dateString = getFancyDate(date);
+
     final placeTextStyle = text.headlineLarge?.copyWith(
       color: color.primary,
       fontWeight: FontWeight.bold,
@@ -37,6 +37,37 @@ class WeatherBar extends StatelessWidget {
           WeatherTempStatus(degree: degree, status: status),
         ]),
         Text(dateString, style: text.labelLarge?.copyWith(color: color.primary.withOpacity(0.5))),
+      ],
+    );
+  }
+}
+
+class WeatherTempStatus extends StatelessWidget {
+  final int degree;
+  final String status;
+
+  const WeatherTempStatus({super.key, required this.degree, required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final text = theme.textTheme;
+    final colors = theme.colorScheme;
+
+    final tempTextStyle = text.displayLarge?.copyWith(
+      color: colors.primary,
+      fontWeight: FontWeight.w900,
+    );
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(mainAxisSize: MainAxisSize.min, children: [
+          Text(degree.toString(), style: tempTextStyle),
+          Text(status, style: text.titleMedium?.copyWith(color: colors.primary)),
+        ]),
+        Text("°C", style: text.labelLarge?.copyWith(color: colors.primary)),
       ],
     );
   }
