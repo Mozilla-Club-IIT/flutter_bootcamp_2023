@@ -17,8 +17,8 @@ Future<List<City>> searchCities(String query) async {
 
 Future<CurrentWeatherData> getCurrentWeather(City city) async {
   final url = Uri.https(apiUrl, "/data/2.5/weather", {
-    "lat": city.latitude,
-    "lon": city.longitude,
+    "lat": city.latitude.toString(),
+    "lon": city.longitude.toString(),
     "appid": apiKey,
   });
 

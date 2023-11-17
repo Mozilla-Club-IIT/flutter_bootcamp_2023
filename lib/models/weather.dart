@@ -52,7 +52,7 @@ class WeatherConditionData {
   factory WeatherConditionData.fromMap(Map<String, dynamic> map) {
     return WeatherConditionData(
       id: map["id"] as int,
-      iconId: map["iconId"] as String,
+      iconId: map["icon"] as String,
       status: WeatherStatus.fromMap(map["main"] as String),
     );
   }
@@ -76,7 +76,7 @@ enum WeatherStatus {
   }
 
   factory WeatherStatus.fromMap(String status) {
-    switch (status) {
+    switch (status.toLowerCase()) {
       case "thunderstorm":
         return WeatherStatus.thunderstorm;
       case "drizzle":
