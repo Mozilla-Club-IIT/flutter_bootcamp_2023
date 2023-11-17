@@ -23,7 +23,7 @@ class City {
     required this.longitude,
   });
 
-  factory City.fromJson(Map<String, dynamic> map) {
+  factory City.fromMap(Map<String, dynamic> map) {
     return City(
       name: map["name"] as String,
       country: map["country"] as String,

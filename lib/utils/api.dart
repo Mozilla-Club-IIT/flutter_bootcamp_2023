@@ -11,5 +11,5 @@ Future<List<City>> searchCities(String query) async {
   final res = await http.get(url);
   final List<dynamic> data = jsonDecode(res.body);
 
-  return data.map((e) => City.fromJson(e as Map<String, dynamic>)).toList();
+  return data.map((e) => City.fromMap(e as Map<String, dynamic>)).toList();
 }
