@@ -37,6 +37,7 @@ class WeatherForecastCard extends StatelessWidget {
             _TemperatureStatus(
               temperatureRange: data.temperatureRange,
               status: data.weather.status,
+              iconId: data.weather.iconId,
             )
           ],
         ),
@@ -91,8 +92,13 @@ class _WeatherCardInfo extends StatelessWidget {
 class _TemperatureStatus extends StatelessWidget {
   final (double, double) temperatureRange;
   final WeatherStatus status;
+  final String iconId;
 
-  const _TemperatureStatus({required this.temperatureRange, required this.status});
+  const _TemperatureStatus({
+    required this.temperatureRange,
+    required this.status,
+    required this.iconId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +108,7 @@ class _TemperatureStatus extends StatelessWidget {
 
     final temperatureLow = convertKelvinToCelsius(temperatureRange.$1);
     final temperatureHigh = convertKelvinToCelsius(temperatureRange.$2);
-    final tempStyle = text.headlineSmall?.copyWith(
+    final tempStyle = text.titleMedium?.copyWith(
       color: colors.primary,
       fontWeight: FontWeight.w900,
     );
@@ -110,18 +116,27 @@ class _TemperatureStatus extends StatelessWidget {
     return SizedBox(
       width: 128,
       child: Stack(children: [
-        const Center(child: Icon(Icons.sunny, size: 64)),
+        Center(
+          child: Image(
+            height: 128,
+            width: 128,
+            fit: BoxFit.fitWidth,
+            filterQuality: FilterQuality.high,
+            image: AssetImage("assets/icons/$iconId.png"),
+          ),
+        ),
         Positioned(
-          top: 4,
+          top: 0,
           right: 6,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "${temperatureLow.toStringAsFixed(1)}/${temperatureHigh.toStringAsFixed(1)}",
-                style: tempStyle,
-              ),
+              Text(temperatureLow.toStringAsFixed(1), style: tempStyle),
+              const SizedBox(width: 1),
+              Text("/", style: tempStyle?.copyWith(color: colors.onSurfaceVariant)),
+              const SizedBox(width: 1),
+              Text(temperatureHigh.toStringAsFixed(1), style: tempStyle),
               Text("°C", style: text.labelMedium?.copyWith(color: colors.primary)),
             ],
           ),
