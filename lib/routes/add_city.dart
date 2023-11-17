@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/error_screen.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/utils/api.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/utils/hive.dart";
@@ -28,6 +29,10 @@ class _AddCityState extends State<AddCity> {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: ErrorScreen(error: snapshot.error!));
           }
 
           final data = snapshot.requireData;

@@ -1,5 +1,3 @@
-import "dart:convert";
-
 import "package:mozc_flutter_bootcamp_23_showcase/utils/parse.dart";
 
 class CurrentWeatherData {
@@ -34,9 +32,6 @@ class CurrentWeatherData {
       weather: WeatherConditionData.fromMap(weather),
     );
   }
-
-  factory CurrentWeatherData.fromJson(String source) =>
-      CurrentWeatherData.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class ForecastWeatherData extends CurrentWeatherData {

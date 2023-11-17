@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/error_screen.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/components/weather_forecast_card.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
@@ -47,6 +48,10 @@ class _ForecastState extends State<Forecast> {
         if (snapshot.connectionState == ConnectionState.waiting ||
             snapshot.connectionState == ConnectionState.none) {
           return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return Center(child: ErrorScreen(error: snapshot.error!));
         }
 
         final data = snapshot.requireData;

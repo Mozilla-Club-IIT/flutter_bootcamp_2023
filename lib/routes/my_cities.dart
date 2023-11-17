@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/components/city_list_item.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/error_screen.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/routes/add_city.dart";
@@ -113,6 +114,10 @@ class _CityListSliver extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting ||
             snapshot.connectionState == ConnectionState.none) {
           return const SliverFillRemaining(child: Center(child: CircularProgressIndicator()));
+        }
+
+        if (snapshot.hasError) {
+          return SliverFillRemaining(child: Center(child: ErrorScreen(error: snapshot.error!)));
         }
 
         final data = snapshot.requireData;
