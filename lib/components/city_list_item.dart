@@ -8,12 +8,19 @@ class CityListItem extends StatelessWidget {
   final WeatherStatus status;
   final String iconId;
 
+  final String cityIdentifier;
+  final String preferredCityIdentifier;
+  final void Function(String?) onPress;
+
   const CityListItem({
     super.key,
     required this.location,
     required this.temperature,
     required this.status,
     required this.iconId,
+    required this.cityIdentifier,
+    required this.preferredCityIdentifier,
+    required this.onPress,
   });
 
   @override
@@ -29,6 +36,12 @@ class CityListItem extends StatelessWidget {
         height: 48,
         filterQuality: FilterQuality.high,
       ),
+      trailing: Radio(
+        value: cityIdentifier,
+        groupValue: preferredCityIdentifier,
+        onChanged: onPress,
+      ),
+      onTap: () => onPress.call(cityIdentifier),
     );
   }
 }

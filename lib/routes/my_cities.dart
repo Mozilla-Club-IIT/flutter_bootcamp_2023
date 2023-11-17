@@ -15,6 +15,8 @@ class MyCities extends StatefulWidget {
 
 class _MyCitiesState extends State<MyCities> {
   Iterable<City> get cities => getCities();
+  City? get preferredCity => getPreferredCity();
+
   Future<Map<String, CurrentWeatherData>>? currentWeatherFuture;
 
   @override
@@ -43,10 +45,15 @@ class _MyCitiesState extends State<MyCities> {
         floating: true,
         actions: [IconButton(onPressed: onAddPressed, icon: const Icon(Icons.add_rounded))],
       ),
-      if (cities.isEmpty)
-        const SliverFillRemaining(child: _EmptyScreen())
+      if (cities.isEmpty || preferredCity == null)
+        const SliverFillRemaining(child: _EmptyCitiesScreen())
       else
-        _ItemListSliver(cities: cities, future: currentWeatherFuture)
+        _CityListSliver(
+          cities: cities,
+          future: currentWeatherFuture,
+          preferredCityIdentifier: preferredCity!.getIdentifier(),
+          onPress: onListItemPressed,
+        )
     ]);
   }
 
@@ -54,10 +61,21 @@ class _MyCitiesState extends State<MyCities> {
     await Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCity()));
     if (context.mounted) setState(() => {});
   }
+
+  Future onListItemPressed(String? cityIdentifier) async {
+    if (cityIdentifier == null) return;
+
+    final city = cities.firstWhere((e) => e.getIdentifier() == cityIdentifier);
+    await setPreferredCity(city);
+
+    if (context.mounted) {
+      setState(() => {});
+    }
+  }
 }
 
-class _EmptyScreen extends StatelessWidget {
-  const _EmptyScreen();
+class _EmptyCitiesScreen extends StatelessWidget {
+  const _EmptyCitiesScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +92,18 @@ class _EmptyScreen extends StatelessWidget {
   }
 }
 
-class _ItemListSliver extends StatelessWidget {
+class _CityListSliver extends StatelessWidget {
   final Iterable<City> cities;
+  final String preferredCityIdentifier;
   final Future<Map<String, CurrentWeatherData>>? future;
+  final void Function(String?) onPress;
 
-  const _ItemListSliver({required this.cities, required this.future});
+  const _CityListSliver({
+    required this.cities,
+    required this.future,
+    required this.preferredCityIdentifier,
+    required this.onPress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +128,9 @@ class _ItemListSliver extends StatelessWidget {
               temperature: current.temperature,
               status: current.weather.status,
               iconId: current.weather.iconId,
+              cityIdentifier: city.getIdentifier(),
+              preferredCityIdentifier: preferredCityIdentifier,
+              onPress: onPress,
             );
           },
         );
