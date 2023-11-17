@@ -1,46 +1,51 @@
 import "package:flutter/material.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/utils/units.dart";
 
 class MetricsBar extends StatelessWidget {
-  final String wind;
-  final String humidity;
-  final String chanceOfRain;
+  final double wind;
+  final int humidity;
+  final int pressure;
 
   const MetricsBar({
     super.key,
     required this.wind,
     required this.humidity,
-    required this.chanceOfRain,
+    required this.pressure,
   });
 
   @override
   Widget build(BuildContext context) {
+    final wind = convertMpsToKmph(this.wind);
+
     return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Metric(type: MetricType.wind, value: wind),
-      Metric(type: MetricType.humidity, value: humidity),
-      Metric(type: MetricType.chanceOfRain, value: chanceOfRain),
+      Metric(type: MetricType.wind, value: "${wind.toStringAsFixed(2)}km/h"),
+      Metric(type: MetricType.humidity, value: "$humidity%"),
+      Metric(type: MetricType.pressure, value: "${pressure}mbar"),
     ]);
   }
 }
 
 class TinyMetricsBar extends StatelessWidget {
-  final String wind;
-  final String humidity;
-  final String chanceOfRain;
+  final double wind;
+  final int humidity;
+  final int pressure;
 
   const TinyMetricsBar({
     super.key,
     required this.wind,
     required this.humidity,
-    required this.chanceOfRain,
+    required this.pressure,
   });
 
   @override
   Widget build(BuildContext context) {
+    final wind = convertMpsToKmph(this.wind);
+
     return Wrap(spacing: 28, children: [
-      TinyMetric(type: MetricType.wind, value: wind),
-      TinyMetric(type: MetricType.humidity, value: humidity),
-      TinyMetric(type: MetricType.chanceOfRain, value: chanceOfRain),
+      TinyMetric(type: MetricType.wind, value: "${wind.toStringAsFixed(2)}km/h"),
+      TinyMetric(type: MetricType.humidity, value: "$humidity%"),
+      TinyMetric(type: MetricType.pressure, value: "${pressure}mbar"),
     ]);
   }
 }
@@ -72,8 +77,8 @@ class Metric extends StatelessWidget {
         return const Icon(Icons.air_rounded);
       case MetricType.humidity:
         return const Icon(Icons.water_drop_rounded);
-      case MetricType.chanceOfRain:
-        return const Icon(Icons.umbrella_rounded);
+      case MetricType.pressure:
+        return const Icon(Icons.compress_rounded);
     }
   }
 }

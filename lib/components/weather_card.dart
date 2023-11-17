@@ -2,24 +2,25 @@ import "package:flutter/material.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/utils/date.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/utils/units.dart";
 
 class WeatherCard extends StatelessWidget {
   final DateTime date;
-  final int temperature;
   final WeatherStatus status;
 
-  final String humidity;
-  final String wind;
-  final String chanceOfRain;
+  final double temperature;
+  final int humidity;
+  final double wind;
+  final int pressure;
 
   const WeatherCard({
     super.key,
     required this.date,
-    required this.temperature,
     required this.status,
+    required this.temperature,
     required this.humidity,
     required this.wind,
-    required this.chanceOfRain,
+    required this.pressure,
   });
 
   @override
@@ -44,10 +45,10 @@ class WeatherCard extends StatelessWidget {
                 temperature: temperature,
                 humidity: humidity,
                 wind: wind,
-                chanceOfRain: chanceOfRain,
+                pressure: pressure,
               ),
             ),
-            _TemperatureStatus(degree: temperature, status: status)
+            _TemperatureStatus(temperature: temperature, status: status)
           ],
         ),
       ),
@@ -57,18 +58,18 @@ class WeatherCard extends StatelessWidget {
 
 class _WeatherCardInfo extends StatelessWidget {
   final DateTime date;
-  final int temperature;
 
-  final String humidity;
-  final String wind;
-  final String chanceOfRain;
+  final double temperature;
+  final int humidity;
+  final double wind;
+  final int pressure;
 
   const _WeatherCardInfo({
     required this.date,
     required this.temperature,
     required this.humidity,
     required this.wind,
-    required this.chanceOfRain,
+    required this.pressure,
   });
 
   @override
@@ -89,18 +90,18 @@ class _WeatherCardInfo extends StatelessWidget {
       Text(relativeDateString, style: relativeDateTextStyle),
       Text(dateString, style: text.labelMedium?.copyWith(color: colors.onSurfaceVariant)),
       const Spacer(),
-      TinyMetricsBar(humidity: humidity, wind: wind, chanceOfRain: chanceOfRain),
+      TinyMetricsBar(humidity: humidity, wind: wind, pressure: pressure),
     ]);
   }
 }
 
 class _TemperatureStatus extends StatelessWidget {
   const _TemperatureStatus({
-    required this.degree,
+    required this.temperature,
     required this.status,
   });
 
-  final int degree;
+  final double temperature;
   final WeatherStatus status;
 
   @override
@@ -109,6 +110,7 @@ class _TemperatureStatus extends StatelessWidget {
     final text = theme.textTheme;
     final colors = theme.colorScheme;
 
+    final temperature = convertKelvinToCelsius(this.temperature);
     final tempStyle = text.headlineSmall?.copyWith(
       color: colors.primary,
       fontWeight: FontWeight.w900,
@@ -125,7 +127,7 @@ class _TemperatureStatus extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(degree.toString(), style: tempStyle),
+              Text(temperature.toStringAsFixed(1), style: tempStyle),
               Text("°C", style: text.labelMedium?.copyWith(color: colors.primary)),
             ],
           ),

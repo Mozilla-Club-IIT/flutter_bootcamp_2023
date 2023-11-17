@@ -28,9 +28,9 @@ class _ForecastState extends State<Forecast> {
             temperature: 19,
             status: WeatherStatus.clear,
             date: now.copyWith(day: now.day + i),
-            wind: "120km/h",
-            humidity: "22%",
-            chanceOfRain: "11%",
+            wind: 120,
+            humidity: 20,
+            pressure: 120,
           );
         },
       ),

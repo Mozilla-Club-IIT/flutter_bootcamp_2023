@@ -1,21 +1,23 @@
 import "dart:convert";
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class WeatherData {
+class CurrentWeatherData {
   final double temperature;
   final int humidity;
+  final int pressure;
   final double windSpeed;
 
   final WeatherConditionData weather;
 
-  const WeatherData({
+  const CurrentWeatherData({
     required this.temperature,
     required this.humidity,
     required this.windSpeed,
+    required this.pressure,
     required this.weather,
   });
 
-  factory WeatherData.fromMap(Map<String, dynamic> map) {
+  factory CurrentWeatherData.fromMap(Map<String, dynamic> map) {
     final main = map["main"] as Map<String, dynamic>;
     final wind = map["wind"] as Map<String, dynamic>;
 
@@ -23,16 +25,17 @@ class WeatherData {
         .map((e) => e as Map<String, dynamic>)
         .firstWhere((condition) => WeatherStatus.isValid(condition["main"] as String));
 
-    return WeatherData(
+    return CurrentWeatherData(
       temperature: main["temp"] as double,
       humidity: main["humidity"] as int,
+      pressure: main["pressure"] as int,
       windSpeed: wind["speed"] as double,
       weather: WeatherConditionData.fromMap(weather),
     );
   }
 
-  factory WeatherData.fromJson(String source) =>
-      WeatherData.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CurrentWeatherData.fromJson(String source) =>
+      CurrentWeatherData.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class WeatherConditionData {
@@ -112,5 +115,5 @@ enum WeatherStatus {
 enum MetricType {
   wind,
   humidity,
-  chanceOfRain,
+  pressure,
 }
