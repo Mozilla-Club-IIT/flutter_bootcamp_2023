@@ -25,3 +25,18 @@ Future<CurrentWeatherData> getCurrentWeather(City city) async {
   final res = await http.get(url);
   return CurrentWeatherData.fromJson(res.body);
 }
+
+Future<List<ForecastWeatherData>> get5DayForecast(City city) async {
+  final url = Uri.https(apiUrl, "/data/2.5/forecast", {
+    "lat": city.latitude.toString(),
+    "lon": city.longitude.toString(),
+    "appid": apiKey,
+  });
+
+  final res = await http.get(url);
+  final Map<String, dynamic> data = json.decode(res.body);
+
+  return (data["list"] as List<dynamic>)
+      .map((e) => ForecastWeatherData.fromMap(e as Map<String, dynamic>))
+      .toList();
+}

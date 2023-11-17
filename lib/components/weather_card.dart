@@ -4,24 +4,10 @@ import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/utils/date.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/utils/units.dart";
 
-class WeatherCard extends StatelessWidget {
-  final DateTime date;
-  final WeatherStatus status;
+class WeatherForecastCard extends StatelessWidget {
+  final ForecastWeatherDaySummary data;
 
-  final double temperature;
-  final int humidity;
-  final double wind;
-  final int pressure;
-
-  const WeatherCard({
-    super.key,
-    required this.date,
-    required this.status,
-    required this.temperature,
-    required this.humidity,
-    required this.wind,
-    required this.pressure,
-  });
+  const WeatherForecastCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +27,17 @@ class WeatherCard extends StatelessWidget {
           children: [
             Flexible(
               child: _WeatherCardInfo(
-                date: date,
-                temperature: temperature,
-                humidity: humidity,
-                wind: wind,
-                pressure: pressure,
+                date: data.timeRange.$1,
+                chanceOfRainRange: data.chanceOfRainRange,
+                humidityRange: data.humidityRange,
+                windSpeedRange: data.windSpeedRange,
+                weather: data.weather,
               ),
             ),
-            _TemperatureStatus(temperature: temperature, status: status)
+            _TemperatureStatus(
+              temperatureRange: data.temperatureRange,
+              status: data.weather.status,
+            )
           ],
         ),
       ),
@@ -59,17 +48,17 @@ class WeatherCard extends StatelessWidget {
 class _WeatherCardInfo extends StatelessWidget {
   final DateTime date;
 
-  final double temperature;
-  final int humidity;
-  final double wind;
-  final int pressure;
+  final (double, double) chanceOfRainRange;
+  final (int, int) humidityRange;
+  final (double, double) windSpeedRange;
+  final WeatherConditionData weather;
 
   const _WeatherCardInfo({
     required this.date,
-    required this.temperature,
-    required this.humidity,
-    required this.wind,
-    required this.pressure,
+    required this.chanceOfRainRange,
+    required this.humidityRange,
+    required this.windSpeedRange,
+    required this.weather,
   });
 
   @override
@@ -90,19 +79,20 @@ class _WeatherCardInfo extends StatelessWidget {
       Text(relativeDateString, style: relativeDateTextStyle),
       Text(dateString, style: text.labelMedium?.copyWith(color: colors.onSurfaceVariant)),
       const Spacer(),
-      TinyMetricsBar(humidity: humidity, wind: wind, pressure: pressure),
+      TinyMetricsBar(
+        humidity: humidityRange.$2,
+        wind: windSpeedRange.$2,
+        chanceOfRain: chanceOfRainRange.$2,
+      ),
     ]);
   }
 }
 
 class _TemperatureStatus extends StatelessWidget {
-  const _TemperatureStatus({
-    required this.temperature,
-    required this.status,
-  });
-
-  final double temperature;
+  final (double, double) temperatureRange;
   final WeatherStatus status;
+
+  const _TemperatureStatus({required this.temperatureRange, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +100,8 @@ class _TemperatureStatus extends StatelessWidget {
     final text = theme.textTheme;
     final colors = theme.colorScheme;
 
-    final temperature = convertKelvinToCelsius(this.temperature);
+    final temperatureLow = convertKelvinToCelsius(temperatureRange.$1);
+    final temperatureHigh = convertKelvinToCelsius(temperatureRange.$2);
     final tempStyle = text.headlineSmall?.copyWith(
       color: colors.primary,
       fontWeight: FontWeight.w900,
@@ -127,7 +118,10 @@ class _TemperatureStatus extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(temperature.toStringAsFixed(1), style: tempStyle),
+              Text(
+                "${temperatureLow.toStringAsFixed(1)}/${temperatureHigh.toStringAsFixed(1)}",
+                style: tempStyle,
+              ),
               Text("°C", style: text.labelMedium?.copyWith(color: colors.primary)),
             ],
           ),

@@ -29,23 +29,27 @@ class MetricsBar extends StatelessWidget {
 class TinyMetricsBar extends StatelessWidget {
   final double wind;
   final int humidity;
-  final int pressure;
+  final int? pressure;
+final double? chanceOfRain;
 
   const TinyMetricsBar({
     super.key,
     required this.wind,
     required this.humidity,
-    required this.pressure,
+    this.pressure,
+    this.chanceOfRain,
   });
 
   @override
   Widget build(BuildContext context) {
     final wind = convertMpsToKmph(this.wind);
+    final chanceOfRain = this.chanceOfRain != null ? this.chanceOfRain! * 100 : null;
 
     return Wrap(spacing: 28, children: [
       TinyMetric(type: MetricType.wind, value: "${wind.toStringAsFixed(2)}km/h"),
       TinyMetric(type: MetricType.humidity, value: "$humidity%"),
-      TinyMetric(type: MetricType.pressure, value: "${pressure}mbar"),
+      if (pressure != null) TinyMetric(type: MetricType.pressure, value: "${pressure}mbar"),
+      if (chanceOfRain != null) TinyMetric(type: MetricType.chanceOfRain, value: "$chanceOfRain%")
     ]);
   }
 }
@@ -79,6 +83,8 @@ class Metric extends StatelessWidget {
         return const Icon(Icons.water_drop_rounded);
       case MetricType.pressure:
         return const Icon(Icons.compress_rounded);
+      case MetricType.chanceOfRain:
+        return const Icon(Icons.umbrella_rounded);
     }
   }
 }

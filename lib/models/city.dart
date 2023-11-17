@@ -1,4 +1,5 @@
 import "package:hive_flutter/adapters.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/utils/parse.dart";
 
 part "city.g.dart";
 
@@ -27,8 +28,8 @@ class City {
     return City(
       name: map["name"] as String,
       country: map["country"] as String,
-      latitude: map["lat"] as double,
-      longitude: map["lon"] as double,
+      latitude: parseToDouble(map["lat"]),
+      longitude: parseToDouble(map["lon"]),
     );
   }
 }
