@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="mozc_flutter_bootcamp_23_showcase"
+        android:label="Flutter Bootcamp 2023 Showcase"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
