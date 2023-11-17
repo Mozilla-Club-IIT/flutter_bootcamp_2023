@@ -55,7 +55,15 @@ class _HomeState extends State<Home> {
                   location: "${city.name},\n${city.country}",
                   status: WeatherStatus.rain,
                 ),
-                const Center(child: Icon(Icons.sunny, size: 128)),
+                Center(
+                  child: Image(
+                    height: 256,
+                    width: 256,
+                    fit: BoxFit.fitWidth,
+                    filterQuality: FilterQuality.high,
+                    image: AssetImage("assets/icons/${data.weather.iconId}.png"),
+                  ),
+                ),
                 MetricsBar(humidity: data.humidity, wind: data.windSpeed, pressure: data.pressure)
               ],
             ),

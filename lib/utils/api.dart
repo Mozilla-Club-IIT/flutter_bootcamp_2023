@@ -4,8 +4,8 @@ import "package:http/http.dart" as http;
 import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 
-const apiKey = "cc5e52326e06b6ee1530ce5b18371a83";
 const apiUrl = "api.openweathermap.org";
+const apiKey = String.fromEnvironment("MOZC_OPEN_WEATHER_API_KEY");
 
 Future<List<City>> searchCities(String query) async {
   final url = Uri.https(apiUrl, "/geo/1.0/direct", {"q": query, "apiKey": apiKey});
