@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
+import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 
 class CityListItem extends StatelessWidget {
   final String location;

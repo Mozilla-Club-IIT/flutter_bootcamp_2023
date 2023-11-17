@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/utils/date.dart';
+import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/utils/date.dart";
 
 class WeatherCard extends StatelessWidget {
   final DateTime date;

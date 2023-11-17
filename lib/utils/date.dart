@@ -1,4 +1,4 @@
-import 'package:intl/intl.dart';
+import "package:intl/intl.dart";
 
 String getFancyDate(DateTime date) {
   return DateFormat("EEE, MMM d", "en-US").format(date);
@@ -17,5 +17,5 @@ String getRelativeDateString(DateTime date) {
   if (isDateEqualInYMD(date, now)) return "Today";
   if (isDateEqualInYMD(date, dayAfter)) return "Tomorrow";
 
-  return DateFormat('EEEE', 'en-US').format(date);
+  return DateFormat("EEEE", "en-US").format(date);
 }

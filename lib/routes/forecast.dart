@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_card.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
+import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/weather_card.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 
 class Forecast extends StatefulWidget {
   const Forecast({super.key});

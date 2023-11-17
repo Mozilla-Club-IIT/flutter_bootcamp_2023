@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'city.dart';
+part of "city.dart";
 
 // **************************************************************************
 // TypeAdapterGenerator

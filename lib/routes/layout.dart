@@ -1,8 +1,8 @@
-import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/routes/forecast.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/routes/home.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/routes/my_cities.dart';
+import "package:animations/animations.dart";
+import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/routes/forecast.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/routes/home.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/routes/my_cities.dart";
 
 class RootLayout extends StatefulWidget {
   const RootLayout({super.key});

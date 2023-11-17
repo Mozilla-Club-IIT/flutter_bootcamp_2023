@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/models/city.dart';
+import "package:hive/hive.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 
 Future<void> addCity(City city) async {
   final box = Hive.box<City>("cities");

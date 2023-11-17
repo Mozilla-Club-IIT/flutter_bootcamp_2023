@@ -1,4 +1,4 @@
-import 'package:hive_flutter/adapters.dart';
+import "package:hive_flutter/adapters.dart";
 
 part "city.g.dart";
 

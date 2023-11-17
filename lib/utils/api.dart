@@ -1,7 +1,7 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:http/http.dart' as http;
-import 'package:mozc_flutter_bootcamp_23_showcase/models/city.dart';
+import "package:http/http.dart" as http;
+import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 
 const apiKey = "cc5e52326e06b6ee1530ce5b18371a83";
 const apiUrl = "api.openweathermap.org";

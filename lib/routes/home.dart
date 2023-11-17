@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/components/weather_bar.dart';
-import 'package:mozc_flutter_bootcamp_23_showcase/models/weather.dart';
+import "package:flutter/material.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/metrics.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/weather_bar.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
 
 class Home extends StatefulWidget {
   const Home({super.key});
