@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/components/error_screen.dart";
+import "package:mozc_flutter_bootcamp_23_showcase/components/no_preferred_city_screen.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/components/weather_forecast_card.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/city.dart";
 import "package:mozc_flutter_bootcamp_23_showcase/models/weather.dart";
@@ -34,6 +35,10 @@ class _ForecastState extends State<Forecast> {
 
   @override
   Widget build(BuildContext context) {
+    if (preferredCity == null) {
+      return NoPreferredCityScreen(onCityAdded: setForecastData);
+    }
+
     final mediaPadding = MediaQuery.paddingOf(context);
     var padding = EdgeInsets.only(
       left: 8,

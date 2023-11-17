@@ -87,8 +87,11 @@ class _EmptyCitiesScreen extends StatelessWidget {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Icon(Icons.location_off_rounded, size: 56, color: colors.primary),
       const SizedBox(height: 12),
-      Text("No cities are selected yet", style: text.labelLarge),
-      Text("Use the + button to add a city!", style: text.labelLarge)
+      Text(
+        "No cities are selected yet.\nUse the + button to add a city!",
+        style: text.bodyLarge,
+        textAlign: TextAlign.center,
+      ),
     ]);
   }
 }
