@@ -24,11 +24,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        colorSchemeSeed: const Color.fromARGB(255, 4, 43, 89),
-      ),
+      theme: getTheme(),
       home: const RootLayout(),
     );
   }
@@ -42,5 +38,21 @@ class _AppState extends State<App> {
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
+  }
+
+  ThemeData getTheme() {
+    final colorSeed = ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 4, 43, 89));
+
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      colorScheme: colorSeed.copyWith(
+        background: const Color.fromARGB(255, 176, 206, 235),
+        primary: const Color.fromARGB(255, 4, 43, 89),
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color.fromARGB(255, 176, 206, 235),
+      ),
+    );
   }
 }
