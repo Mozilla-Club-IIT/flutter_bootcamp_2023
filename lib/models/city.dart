@@ -32,4 +32,8 @@ class City {
       longitude: parseToDouble(map["lon"]),
     );
   }
+
+  String getIdentifier() {
+    return "$name-$country";
+  }
 }
