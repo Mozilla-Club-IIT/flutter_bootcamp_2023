@@ -30,7 +30,7 @@ class TinyMetricsBar extends StatelessWidget {
   final double wind;
   final int humidity;
   final int? pressure;
-final double? chanceOfRain;
+  final double? chanceOfRain;
 
   const TinyMetricsBar({
     super.key,
